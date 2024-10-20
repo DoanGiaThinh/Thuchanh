@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm người dùng</title>
+</head>
+
+<body>
+    <h1>Thêm người dùng mới</h1>
+    <div class="modal-body">
+        <form method="POST" action="/createUser" enctype="application/x-www-form-urlencoded">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên tài khoản</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên tài khoản"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nhập họ và tên"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Địa chỉ</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm người dùng</button>
+        </form>
+    </div>
+</body>
+
+</html>

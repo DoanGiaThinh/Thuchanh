@@ -6,10 +6,10 @@ import initWebRouter from './router/webRoute.js';
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 viewEngine(app);
-
-
 initWebRouter(app);
 
 app.listen(port, () => {
