@@ -7,7 +7,7 @@
     <title>Trang chu</title>
 </head>
 <body>
-    <%- include('../header.ejs', {title: 'Trang chủ'}) -%>
+    <%- include('../header.ejs', { title: 'Trang chủ', user: user }) -%>
     <%- include(`../../${data.path}`, data.props) -%>
     <%- include('../footer.ejs', {title: 'Trang chủ'}) -%>
 </body>
