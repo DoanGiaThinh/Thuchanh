@@ -19,16 +19,17 @@ const initWebRouter = (app) => {
     router.get('/register', UserController.getRegister);
     router.post('/register', UserController.registerUser);
     router.post('/logout', UserController.logoutUser);
-    router.get('/listproduct', ProductController.getListProduct);
-    router.get('/listcategories',ProductController.getListCategories);
-    
+    router.get('/listproduct', ProductController.getListProduct);  // Hiển thị tất cả sản phẩm
+    router.get('/listproduct/category', ProductController.getListProductByCt);  // Hiển thị sản phẩm theo nhóm
+    router.get('/listcategories', ProductController.getListCategories);  // Hiển thị danh sách nhóm sản phẩm
 
+    // Các route khác
     router.get('/detail/:id', checkLogin, checkRole('view'), UserController.viewUserDetails);
     router.get('/edit/:id', checkLogin, checkRole('edit'), UserController.editUser);
-    router.post('/update/:id',checkLogin, checkRole('edit'), UserController.updateUser);
+    router.post('/update/:id', checkLogin, checkRole('edit'), UserController.updateUser);
     router.post('/delete/:id', checkLogin, checkRole('delete'), UserController.deleteUser);
     router.post('/createUser', checkLogin, UserController.createUser);
-    
+
     return app.use("/", router);
 };
 

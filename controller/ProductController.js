@@ -1,5 +1,6 @@
-import { getAllCategories, getAllProduct } from "../model/productModel"; 
+import { getAllCategories, getAllProduct, getProductByCategories } from "../model/productModel";
 
+// Hiển thị tất cả sản phẩm
 const getListProduct = async (req, res) => {
     try {
         const products = await getAllProduct();  
@@ -17,7 +18,8 @@ const getListProduct = async (req, res) => {
         return res.status(500).send("An error occurred while fetching products: " + error.message);
     }
 };
-//bảng nhóm
+
+// Hiển thị tất cả nhóm sản phẩm
 const getListCategories = async (req, res) => {
     try {
         const categories = await getAllCategories();  
@@ -31,8 +33,33 @@ const getListCategories = async (req, res) => {
             user: req.session.user
         });
     } catch (error) {
-        console.error("Error fetching products:", error);
-        return res.status(500).send("An error occurred while fetching products: " + error.message);
+        console.error("Error fetching categories:", error);
+        return res.status(500).send("An error occurred while fetching categories: " + error.message);
     }
 };
-export default { getListProduct, getListCategories };
+// Hiển thị sản phẩm theo nhóm
+const getListProductByCt = async (req, res) => {
+    try {
+        const { category } = req.query;  // Lấy id nhóm từ query string
+        const products = category ? await getProductByCategories(category) : await getAllProduct(); // Nếu có category, lọc theo nhóm
+
+        const categories = await getAllCategories();  // Lấy tất cả nhóm sản phẩm
+
+        return res.render('layout/default', {
+            title: "Product by Category",
+            data: { 
+                path: "views/products/listproduct",
+                props: { 
+                    sanpham: products,  // Sản phẩm lọc theo nhóm
+                    nhom: categories    // Nhóm sản phẩm
+                }  
+            },
+            user: req.session.user
+        });
+    } catch (error) {
+        console.error("Error fetching products by category:", error);
+        return res.status(500).send("An error occurred while fetching products by category: " + error.message);
+    }
+};
+
+export default { getListProduct, getListCategories, getListProductByCt };

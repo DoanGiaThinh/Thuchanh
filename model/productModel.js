@@ -19,5 +19,9 @@ const getAllCategories = async() => {
         throw error;  // Đảm bảo lỗi được ném ra ngoài để controller có thể xử lý
     }
 }
+const getProductByCategories = async (idnhom) => {
+    const [rows] = await pool.execute('SELECT * FROM sanpham WHERE idnhom = ?', [idnhom]);
+    return rows;
+};
 
-export { getAllProduct, getAllCategories };  // Export phương thức đúng cách
+export { getAllProduct, getAllCategories, getProductByCategories };
