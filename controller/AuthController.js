@@ -1,6 +1,7 @@
 import express from 'express';
 import * as userModel from "../model/userModel"
 import bcrypt from 'bcrypt';
+import * as productModel from '../model/productModel';
 
 const getAllUsers = async (req, res) => {
   let users = await userModel.getAllUser();
@@ -196,4 +197,20 @@ const updateUser = async (req, res) => {
       });
     }
   };
-export default { getAllUsers, detailUser, createUser, updateUser, delUser, login };
+  const getAllProduct = async (req, res) => {
+    let products = await productModel.getAllProduct();
+    return res.status(200).json({
+      errCode: 1,
+      message: "Success",
+      sanpham: products
+    });
+  }  
+  const getAllCategories = async (req, res) => {
+    let categories = await productModel.getAllCategories();
+    return res.status(200).json({
+      errCode: 1,
+      message: "Success",
+      nhom: categories
+    });
+  } 
+export default { getAllUsers, detailUser, createUser, updateUser, delUser, login, getAllProduct, getAllCategories};

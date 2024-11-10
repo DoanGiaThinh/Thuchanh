@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
+
         .container {
             max-width: 500px;
             margin-top: 100px;
@@ -19,101 +21,131 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
         }
-        .btn-primary, .btn-secondary {
+
+        .btn-primary,
+        .btn-secondary {
             width: 100%;
             transition: background-color 0.3s, transform 0.2s;
         }
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #0056b3;
             transform: scale(1.05);
         }
+
         .btn-secondary {
             background-color: #6c757d;
             border-color: #6c757d;
         }
+
         .btn-secondary:hover {
             background-color: #5a6268;
             border-color: #545b62;
             transform: scale(1.05);
         }
+
         #passwordHelp {
             display: none;
             color: red;
             font-size: 0.875em;
             margin-top: 5px;
         }
+
         input:focus {
             border-color: #007bff;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
+
         input.is-valid {
             border-color: #28a745;
         }
+
         input.is-invalid {
             border-color: #dc3545;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Tạo Tài Khoản</h2>
         <% if (message) { %>
-            <div class="alert alert-danger"><%= message %></div>
-        <% } %>
-        <form method="POST" action="/register">
-            <div class="mb-3">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required />
+            <div class="alert alert-danger">
+                <%= message %>
             </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required />
-            </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required />
-                <div id="passwordHelp">Mật khẩu xác nhận không khớp</div>
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" required />
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" required />
-            </div>
-            <div class="mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="role" name="role" value="Vai trò: User (Người dùng)" readonly />
-            </div>
-            <!-- Row for the buttons -->
-            <div class="row">
-                <div class="col-6">
-                    <button type="button" class="btn btn-secondary" onclick="history.back()">Quay lại</button>
-                </div>
-                <div class="col-6">
-                    <button type="submit" class="btn btn-primary">Tạo Tài Khoản</button>
-                </div>
-            </div>
-        </form>
+            <% } %>
+                <form method="POST" action="/register">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Tên tài khoản" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                            placeholder="Xác nhận mật khẩu" required />
+                        <div id="passwordHelp">Mật khẩu xác nhận không khớp</div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ"
+                            required />
+                    </div>
+                    <div class="mb-3">
+
+                        <select class="form-select" id="sex" name="sex" required>
+                            <option value="" disabled selected>Giới Tính</option>
+                            <option value="Male">Nam</option>
+                            <option value="Famale">Nữ</option>
+                            <option value="Other">Khác</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="role" name="role" value="Vai trò: User (Người dùng)"
+                            readonly />
+                    </div>
+                    <!-- Row for the buttons -->
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary" onclick="history.back()">Quay lại</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary">Tạo Tài Khoản</button>
+                        </div>
+                    </div>
+                </form>
     </div>
-    
+
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirmPassword');
         const passwordHelpText = document.getElementById('passwordHelp');
 
-        confirmPasswordInput.addEventListener('input', function() {
+        confirmPasswordInput.addEventListener('input', function () {
             if (confirmPasswordInput.value === passwordInput.value) {
                 passwordHelpText.style.display = 'none';
                 confirmPasswordInput.classList.remove('is-invalid');
@@ -126,4 +158,5 @@
         });
     </script>
 </body>
+
 </html>

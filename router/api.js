@@ -9,6 +9,8 @@ const initAPIRoute = (app) => {
   router.put('/updateUser', AuthController.updateUser);
   router.delete('/deleteUser', AuthController.delUser);
   router.post('/login', AuthController.login);
+  router.get('/listproduct', AuthController.getAllProduct);
+  router.get('/listcategories',AuthController.getAllCategories);
 
   return app.use("/api/v1", router)
 }

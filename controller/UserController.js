@@ -22,7 +22,7 @@ const getListPage = async (req, res) => {
 
 
 const createUser = async (req, res) => {
-    const { username, password, confirmPassword, fullname, address,email } = req.body;
+    const { username, password, confirmPassword, fullname, address, sex, email, role} = req.body;
 
     // Kiểm tra xem mật khẩu và xác nhận mật khẩu có khớp không
     if (password !== confirmPassword) {
@@ -34,7 +34,7 @@ const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Tạo người dùng mới với mật khẩu đã băm
-        const newUserId = await userModel.createUser(username, hashedPassword, fullname, address, email);
+        const newUserId = await userModel.createUser(username, hashedPassword, fullname, address, sex, email, role);
         return res.redirect('/list');
     } catch (error) {
         console.error('Lỗi khi thêm người dùng:', error);

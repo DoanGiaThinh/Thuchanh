@@ -5,6 +5,7 @@ import { getContactPage } from '../controller/ContactController';
 import UserController from '../controller/UserController';
 import checkRole from '../middleware/checkRole';
 import checkLogin from '../middleware/auth';
+import ProductController from '../controller/ProductController';
 
 const router = express.Router();
 
@@ -18,6 +19,9 @@ const initWebRouter = (app) => {
     router.get('/register', UserController.getRegister);
     router.post('/register', UserController.registerUser);
     router.post('/logout', UserController.logoutUser);
+    router.get('/listproduct', ProductController.getListProduct);
+    router.get('/listcategories',ProductController.getListCategories);
+    
 
     router.get('/detail/:id', checkLogin, checkRole('view'), UserController.viewUserDetails);
     router.get('/edit/:id', checkLogin, checkRole('edit'), UserController.editUser);

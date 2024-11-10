@@ -6,9 +6,10 @@ import session from 'express-session';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
 import bodyParser from 'body-parser';
+import initAPIRoute from './router/api';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1234;
 
 
 
@@ -36,6 +37,7 @@ app.use(bodyParser.json())
   
   viewEngine(app);
   initWebRouter(app);
+  initAPIRoute(app);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

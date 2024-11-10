@@ -11,24 +11,26 @@ const createUser = async (
     password,
     fullname,
     address,
+    sex,
     email,
     role = 'user'
 ) => {
     const [result] = await connection.execute(
-        'INSERT INTO users (username, password, fullname, address, email, role) VALUES (?, ?, ? , ?, ?, ?)',
-        [username, password, fullname, address, email, role]
+        'INSERT INTO users (username, password, fullname, address, sex, email, role) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [username, password, fullname, address, sex, email, role]
     );
     return result.insertId;
-}
+};
+
 
 const getUserById = async (id) => {
     const [rows] = await pool.execute('SELECT * FROM users WHERE id = ?', [id]);
     return rows[0];
 };
 
-const updateUser = async (id, username, fullname, address, email) => {
+const updateUser = async (id, username, fullname, address, sex, email) => {
     const [result] = await pool.execute(
-        'UPDATE users SET username = ?, fullname = ?, address = ?, email = ? WHERE id = ?',
+        'UPDATE users SET username = ?, fullname = ?, address = ?, sex = ?, email = ? WHERE id = ?',
         [username, fullname, address, email, id]
     );
     return result;
