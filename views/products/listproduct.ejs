@@ -11,25 +11,6 @@
     <div class="container mt-4">
         <h1>Danh sách Sản Phẩm</h1>
 
-        <!-- Hiển thị nhóm sản phẩm -->
-        <div class="mb-3">
-            <a href="/listproduct/category">Hiển thị sản phẩm theo loại</a>
-            <% if (data.props.nhom && data.props.nhom.length > 0) { %>
-                <div class="btn-group flex-wrap" role="group">
-                    <% data.props.nhom.forEach(function(categories, index) { %>
-                        <a href="/listproduct/category?category=<%= categories.idnhom %>" 
-                           class="btn btn-outline-primary btn-lg me-2 mb-2" 
-                           title="Xem sản phẩm trong nhóm <%= categories.ten %>">
-                           <%= categories.ten %>
-                        </a>
-                    <% }); %>
-                </div>
-            <% } %>
-        </div>
-        
-        
-        
-
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -54,7 +35,7 @@
                             <td><%= product.mota %></td>
                             <td><%= product.idnhom %></td>
                             <td>
-                                <a href="/detail/<%= product.masp %>" class="btn btn-outline-secondary" title="Xem chi tiết">
+                                <a href="/detailproduct/<%= product.masp %>" class="btn btn-outline-secondary" title="Xem chi tiết">
                                     <i class="fa-regular fa-eye"></i>
                                 </a>
                                 <a href="/edit/<%= product.masp %>" class="btn btn-outline-primary" title="Chỉnh sửa" style="color: aqua;">

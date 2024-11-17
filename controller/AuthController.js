@@ -1,5 +1,5 @@
-import * as userModel from "../model/userModel"
 import * as productModel from "../model/productModel";
+import * as userModel from "../model/userModel";
 import bcrypt from 'bcrypt';
 
 const saltRounds = 10; // Số vòng băm mật khẩu
@@ -146,7 +146,7 @@ const login = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findUserByUsername(username);
+    const user = await userModel.findByUsername(username);
     if (!user) {
       return res.status(404).json({
         errCode: 1,
@@ -232,5 +232,14 @@ const getListProductByCategoryApi = async (req, res) => {
     });
   }
 };
-
-export default { getAllUsers, detailUser, createUser, updateUser, delUser, login, getAllProduct, getAllCategories, getListProductByCategoryApi };
+// Lấy chi tiết sản phẩm
+const detailProduct = async (req, res) => {
+  let products = req.params.products;
+  let data = await productModel.getProductById(products);
+  return res.status(200).json({
+    errCode: 1,
+    message: "Success",
+    users: data
+  });
+};
+export default { getAllUsers, detailUser, createUser, updateUser, delUser, login, getAllProduct, getAllCategories, getListProductByCategoryApi, detailProduct };

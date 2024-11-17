@@ -1,4 +1,5 @@
-import userModel from "../model/userModel";
+import * as userModel from "../model/userModel";
+
 import bcrypt from 'bcrypt';
 
 const getListPage = async (req, res) => {
@@ -129,7 +130,6 @@ const getLogin = (req, res) => {
 const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
-    // Lấy người dùng từ cơ sở dữ liệu theo username
     const user = await userModel.findByUsername(username);
 
     if (!user) {

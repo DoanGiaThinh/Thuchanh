@@ -1,5 +1,6 @@
 import pool from "../connectDB";
 import connection from "../connectDB";
+import bcrypt from 'bcrypt';
 
 const getAllUser = async () => {
     const [rows, fields] = await pool.execute('SELECT * FROM `users`');
@@ -22,7 +23,9 @@ const createUser = async (
     return result.insertId;
 };
 
-
+const verifyPassword = async (inputPassword, hashedPassword) => {
+    return await bcrypt.compare(inputPassword, hashedPassword);
+  };
 const getUserById = async (id) => {
     const [rows] = await pool.execute('SELECT * FROM users WHERE id = ?', [id]);
     return rows[0];
@@ -45,4 +48,6 @@ const findByUsername = async (username) => {
     const [rows] = await connection.execute('SELECT * FROM users WHERE username = ?', [username]);
     return rows[0]; // Return the user if found
   };
-export default { getAllUser, createUser, getUserById, updateUser, deleteUser, findByUsername };
+
+
+export { getAllUser, createUser, getUserById, updateUser, deleteUser, findByUsername, verifyPassword };

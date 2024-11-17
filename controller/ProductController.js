@@ -1,4 +1,5 @@
-import { getAllCategories, getAllProduct, getProductByCategories } from "../model/productModel";
+import path from "path";
+import { getAllCategories, getAllProduct, getProductByCategories, getProductById } from "../model/productModel";
 
 // Hiển thị tất cả sản phẩm
 const getListProduct = async (req, res) => {
@@ -18,6 +19,17 @@ const getListProduct = async (req, res) => {
         return res.status(500).send("An error occurred while fetching products: " + error.message);
     }
 };
+//Hiển thị chi tiết sản phẩm
+const getProductDetail = async (req, res) => {
+    const masp = req.params.masp; // Lấy mã sản phẩm từ URL
+    const products = await getProductById(masp); // Lấy sản phẩm theo masp
+    if (products) {
+        return res.render('products/detailproduct', { products });
+    } else {
+        return res.status(404).send('Không tìm thấy Sản Phẩm');
+    }
+};
+
 
 // Hiển thị tất cả nhóm sản phẩm
 const getListCategories = async (req, res) => {
@@ -62,4 +74,4 @@ const getListProductByCt = async (req, res) => {
     }
 };
 
-export default { getListProduct, getListCategories, getListProductByCt };
+export default { getListProduct, getProductDetail, getListCategories, getListProductByCt };

@@ -24,6 +24,7 @@ const initWebRouter = (app) => {
     router.get('/listcategories', ProductController.getListCategories);  // Hiển thị danh sách nhóm sản phẩm
 
     // Các route khác
+    router.get('/detailproduct/:masp', checkLogin, checkRole('view'), ProductController.getProductDetail);
     router.get('/detail/:id', checkLogin, checkRole('view'), UserController.viewUserDetails);
     router.get('/edit/:id', checkLogin, checkRole('edit'), UserController.editUser);
     router.post('/update/:id', checkLogin, checkRole('edit'), UserController.updateUser);
