@@ -13,6 +13,7 @@ const initAPIRoute = (app) => {
   router.get('/listcategories',AuthController.getAllCategories);
   router.get('/listproduct/category', AuthController.getListProductByCategoryApi);
   router.get('/detailproduct/:products', AuthController.detailProduct);
+  router.post('/register', AuthController.handleRegister);
 
   return app.use("/api/v1", router)
 }

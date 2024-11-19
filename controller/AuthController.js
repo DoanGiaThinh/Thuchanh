@@ -239,7 +239,35 @@ const detailProduct = async (req, res) => {
   return res.status(200).json({
     errCode: 1,
     message: "Success",
-    users: data
+    sanpham: data
   });
 };
-export default { getAllUsers, detailUser, createUser, updateUser, delUser, login, getAllProduct, getAllCategories, getListProductByCategoryApi, detailProduct };
+
+//Đăng ký người dùng
+const handleRegister = async (req, res) => {
+  try {
+    if (!req.body.username || !req.body.password || !req.body.email) {
+      return res.status(400).json({
+        errCode: 1,
+        message: "Missing required parameters",
+        data: '',
+      });
+    }
+    let data = await userModel.createUser(req.body);
+    return res.status(200).json({
+      errCode: 0,
+      message: "User created successfully",
+      data: '',
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: 'erro',
+      errCode: '-1',
+      data: '',
+    })
+  }
+
+  console.log("oke r đó", req.body);
+}
+export default { getAllUsers, detailUser, createUser, updateUser, delUser, login, getAllProduct, getAllCategories, getListProductByCategoryApi, detailProduct, handleRegister };
